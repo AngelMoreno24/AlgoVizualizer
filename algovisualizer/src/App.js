@@ -30,13 +30,28 @@ function App() {
   },[array])
 
   useEffect(() => {
-    if (index < array.length && play == true) {
-      const timeout = setTimeout(() => {
-        setStep(array[index]); // Update step
-        setIndex(prev => prev + 1); // Move to next index
-      }, 1000); // Delay between updates
+    
+    if(array.length >0){
+      if(index < 0){
+        setIndex(0);
+      }
+      if(index > array.length-1){
+        setIndex(array.length-1);
+      }
+    }
+    if (index < array.length && array.length >-1) {
+      setStep(array[index]); // Update step
 
-      return () => clearTimeout(timeout); // Cleanup on re-renders
+      if ( play == true) {
+          
+        const timeout = setTimeout(() => {
+
+          setStep(array[index]); // Update step
+          setIndex(prev => prev + 1); // Move to next index
+        }, 1000); // Delay between updates
+
+        return () => clearTimeout(timeout); // Cleanup on re-renders
+      }
     }
   }, [index, array, play]); // Runs when `index` changes
 
@@ -50,7 +65,7 @@ function visualizer(instruction){
     return(
       
         <div >
-          <p>{instruction.action} {instruction.left}  {instruction.right} {instruction.array}</p>
+          <p>{instruction.action} {instruction.left}  {instruction.right} </p>
            
           <div className='bar-grid'>
 
@@ -106,9 +121,29 @@ const DynamicBar = ({ value, maxValue, color = 'blue', width = '30px' }) => {
     <div className="App">
       <header className="App-header"> 
 
-        <button onClick={()=>{play?(setPlay(false)):(setPlay(true))}}>
-          {play?("pause"):("play")}
-        </button>
+        <div>
+
+          <button onClick={()=>{setIndex(0)}}>
+            skip back
+          </button>
+
+          <button onClick={()=>{setIndex(index-1)}}>
+            step back
+          </button>
+
+          <button onClick={()=>{play?(setPlay(false)):(setPlay(true))}}>
+            {play?("pause"):("play")}
+          </button>
+          
+          <button onClick={()=>{setIndex(index+1)}}>
+            step forward
+          </button>
+ 
+          <button onClick={()=>{setIndex(array.length-1)}}>
+            skip forward
+          </button>
+
+        </div>
         <div>   
       
                 {visualizer(step)}
