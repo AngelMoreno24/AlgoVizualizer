@@ -8,18 +8,45 @@ function App() {
   let [array, setArray] = useState([]);
   
   let [step, setStep] = useState([]);
+  const [index, setIndex] = useState(0);
 
   useEffect(()=>{
 
     setArray(bubbleSort([2,5,1,6,7,3,5,1]));
     
-
   },[])
 
+  useEffect(()=>{ 
 
+    if(array.length >0){
+
+      setStep(array[0])
+      console.log("asdasdasdsad")
+      console.log(array[0])
+ 
+
+    }
+
+  },[array])
+
+  useEffect(() => {
+    if (index < array.length) {
+      const timeout = setTimeout(() => {
+        setStep(array[index]); // Update step
+        setIndex(prev => prev + 1); // Move to next index
+      }, 1000); // Delay between updates
+
+      return () => clearTimeout(timeout); // Cleanup on re-renders
+    }
+  }, [index, array]); // Runs when `index` changes
+
+
+
+
+  
 function visualizer(instruction){
 
-  if(instruction.action == "comparison"){
+  if(instruction.action){
     return(
       
         <div>
@@ -78,18 +105,10 @@ const DynamicBar = ({ value, maxValue, color = 'blue', width = '20px' }) => {
   return (
     <div className="App">
       <header className="App-header"> 
-        <div>  
-            {array.map((data)=>{
-              
-            return(
-              <div>
-
+        <div>   
       
-                {visualizer(data)}
-
-              </div>
-            )
-            })}
+                {visualizer(step)}
+ 
           
         </div>
         <a

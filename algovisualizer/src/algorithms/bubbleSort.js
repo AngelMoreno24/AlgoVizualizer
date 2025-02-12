@@ -39,7 +39,7 @@ export function bubbleSort(array) {
                     action: "swap",
                     left: i, 
                     right: i+1,
-                    array: array
+                    array: [...array]
 
                 }
             )
