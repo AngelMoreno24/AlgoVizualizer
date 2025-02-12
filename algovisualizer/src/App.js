@@ -68,7 +68,7 @@ function visualizer(instruction){
                   <div >
 
                     <DynamicBar key={index} value={item} maxValue={10} color={color} />
-                    <p></p>
+                    <p>{item}</p>
                     
                   </div>
                 );
@@ -84,13 +84,13 @@ function visualizer(instruction){
   }
 }
 
-const DynamicBar = ({ value, maxValue, color = 'blue', width = '20px' }) => {
+const DynamicBar = ({ value, maxValue, color = 'blue', width = '30px' }) => {
   const percentage = (value / maxValue) * 100;
 
   const barStyle = {
     width: width,
     height:  percentage ,
-    backgroundColor: color,
+    backgroundColor: color, 
     transition: 'width 0.3s ease-in-out', // Optional: for smooth transitions
   };
  
