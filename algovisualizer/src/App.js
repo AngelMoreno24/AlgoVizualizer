@@ -9,16 +9,16 @@ function App() {
   
   let [step, setStep] = useState([]);
   const [index, setIndex] = useState(0);
-
+  const [play, setPlay] = useState(true);
   useEffect(()=>{
 
-    setArray(bubbleSort([2,5,1,6,7,3,5,1]));
+    setArray(bubbleSort([2,5,12,6,7,3,5,1,12,61,6,31,51]));
     
   },[])
 
   useEffect(()=>{ 
 
-    if(array.length >0){
+    if(array.length >0 && play==true){
 
       setStep(array[0])
       console.log("asdasdasdsad")
@@ -30,7 +30,7 @@ function App() {
   },[array])
 
   useEffect(() => {
-    if (index < array.length) {
+    if (index < array.length && play == true) {
       const timeout = setTimeout(() => {
         setStep(array[index]); // Update step
         setIndex(prev => prev + 1); // Move to next index
@@ -38,7 +38,7 @@ function App() {
 
       return () => clearTimeout(timeout); // Cleanup on re-renders
     }
-  }, [index, array]); // Runs when `index` changes
+  }, [index, array, play]); // Runs when `index` changes
 
 
 
@@ -49,7 +49,7 @@ function visualizer(instruction){
   if(instruction.action){
     return(
       
-        <div>
+        <div >
           <p>{instruction.action} {instruction.left}  {instruction.right} {instruction.array}</p>
            
           <div className='bar-grid'>
@@ -105,6 +105,10 @@ const DynamicBar = ({ value, maxValue, color = 'blue', width = '20px' }) => {
   return (
     <div className="App">
       <header className="App-header"> 
+
+        <button onClick={()=>{play?(setPlay(false)):(setPlay(true))}}>
+          {play?("pause"):("play")}
+        </button>
         <div>   
       
                 {visualizer(step)}
