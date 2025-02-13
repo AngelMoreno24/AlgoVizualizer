@@ -3,16 +3,23 @@ import './App.css';
 import { bubbleSort } from './algorithms/bubbleSort';
 import { useEffect, useState } from 'react';
 import './components/bar.css'
+import './components/layout.css'
+
+
 function App() {
 
   let [array, setArray] = useState([]);
   
   let [step, setStep] = useState([]);
   const [index, setIndex] = useState(0);
-  const [play, setPlay] = useState(true);
+  const [play, setPlay] = useState(false);
+  const [amount, setAmoount] = useState(false);
+
+
+
   useEffect(()=>{
 
-    setArray(bubbleSort([2,5,12,6,7,3,5,1,12,61,6,31,51]));
+    setArray(bubbleSort([2,5,12,6,7,3,5,1,12,2,5,12,6,7,3,5,1,12,2,5,12,6,7,3,5,1,12,2,5,12,6,7,3,5,1,12]));
     
   },[])
 
@@ -64,9 +71,12 @@ function visualizer(instruction){
   if(instruction.action){
     return(
       
-        <div >
+        <div className='body'>
+          <div>
           <p>{instruction.action} {instruction.left}  {instruction.right} </p>
            
+
+          </div>
           <div className='bar-grid'>
 
 
@@ -83,7 +93,7 @@ function visualizer(instruction){
                   <div >
 
                     <DynamicBar key={index} value={item} maxValue={10} color={color} />
-                    <p>{item}</p>
+                  
                     
                   </div>
                 );
@@ -99,9 +109,10 @@ function visualizer(instruction){
   }
 }
 
-const DynamicBar = ({ value, maxValue, color = 'blue', width = '30px' }) => {
-  const percentage = (value / maxValue) * 100;
-
+const DynamicBar = ({ value, maxValue, color = 'blue', width = '15px' }) => {
+  const percentage = (value / maxValue) * 100;  
+  const size = (array.length-1/100)*.01
+  
   const barStyle = {
     width: width,
     height:  percentage ,
@@ -118,47 +129,49 @@ const DynamicBar = ({ value, maxValue, color = 'blue', width = '30px' }) => {
 
   
   return (
-    <div className="App">
-      <header className="App-header"> 
+    <div className="App"> 
+      <div className="background-color">
+        
+      <div class="header">
 
-        <div>
+        <h1> Bubble Sort</h1>
+      </div>
+        
+        <div class="btn-space">
 
-          <button onClick={()=>{setIndex(0)}}>
-            skip back
-          </button>
+          <div class="btn-group">
 
-          <button onClick={()=>{setIndex(index-1)}}>
-            step back
-          </button>
+            <button onClick={()=>{setIndex(0)}}>
+              skip back
+            </button>
 
-          <button onClick={()=>{play?(setPlay(false)):(setPlay(true))}}>
-            {play?("pause"):("play")}
-          </button>
-          
-          <button onClick={()=>{setIndex(index+1)}}>
-            step forward
-          </button>
- 
-          <button onClick={()=>{setIndex(array.length-1)}}>
-            skip forward
-          </button>
+            <button onClick={()=>{setIndex(index-1)}}>
+              step back
+            </button>
 
+            <button onClick={()=>{play?(setPlay(false)):(setPlay(true))}}>
+              {play?("pause"):("play")}
+            </button>
+            
+            <button onClick={()=>{setIndex(index+1)}}>
+              step forward
+            </button>
+  
+            <button onClick={()=>{setIndex(array.length-1)}}>
+              skip forward
+            </button>
+
+          </div>
         </div>
-        <div>   
+
+        <div className='body'>   
       
                 {visualizer(step)}
  
           
         </div>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
+      </div>
     </div>
   );
 }

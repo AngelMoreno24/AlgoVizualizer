@@ -1,0 +1,20 @@
+.header {
+    padding: 30px;
+    text-align: center; 
+}
+
+.background-color{
+     
+  min-height: 100vh;
+  text-align: center; 
+  padding: 30px;
+  align-items: center;
+  justify-content: center; 
+  display: flex;
+  flex-direction: column;
+}
+
+.body{
+    height: 600px;
+}
+
