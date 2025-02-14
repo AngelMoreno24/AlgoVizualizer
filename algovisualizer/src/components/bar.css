@@ -12,8 +12,10 @@
 }
 .btn-space{
     
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #005d3b; /* Green background */
+    border-radius: 10px;
 }
 .btn-group button {
     background-color: #04AA6D; /* Green background */

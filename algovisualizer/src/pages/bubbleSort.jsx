@@ -13,8 +13,8 @@ const BubbleSort = () => {
     let [step, setStep] = useState([]);
     const [index, setIndex] = useState(0);
     const [play, setPlay] = useState(false);
-    const [amount, setAmoount] = useState(false);
-  
+    const [size, setSize] = useState(50);
+    
   
   
     useEffect(()=>{
@@ -170,7 +170,17 @@ const BubbleSort = () => {
    
             
           </div>
-          <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
+
+          <input
+                type="range"
+                min="1"
+                max="100"
+                value={size}
+                className="slider"
+                id="myRange"
+                onChange={(e) => setSize(Number(e.target.value))}
+                />
+      <p>Value: {size}</p>
         </div>
       </div>
     );
