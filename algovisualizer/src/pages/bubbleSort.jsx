@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import '../components/bar.css'
 import '../components/layout.css'
 import numberGen from '../components/numberGen';
-
+import visualizer from '../components/visualizer';
 const BubbleSort = () => {
   
   
@@ -15,6 +15,7 @@ const BubbleSort = () => {
     const [index, setIndex] = useState(0);
     const [play, setPlay] = useState(false);
     const [size, setSize] = useState(50);
+    const [speed, setSpeed] = useState(1750);
     
   
   
@@ -56,7 +57,7 @@ const BubbleSort = () => {
   
             setStep(array[index]); // Update step
             setIndex(prev => prev + 1); // Move to next index
-          }, 1000); // Delay between updates
+          }, 2000-speed); // Delay between updates
   
           return () => clearTimeout(timeout); // Cleanup on re-renders
         }
@@ -66,73 +67,6 @@ const BubbleSort = () => {
   
   
   
-      
-    function visualizer(instruction){
-  
-      if(instruction.action){
-        return(
-          
-            <div className='body'>
-              <div>
-              <p>{instruction.action} {instruction.left}  {instruction.right} </p>
-              
-  
-              </div>
-              <div className='bar-grid'>
-  
-  
-                  {instruction.array.map((item, index) => {
-  
-                    let color = "green"; // Default color
-  
-                    if(index == instruction.left || index == instruction.right){
-                      color = "blue"
-                    }
-                    let value = "";
-                    if(size<30){
-
-                        value = item;
-                    }
-                    return(
-                      
-                      <div >
-  
-                        <DynamicBar key={index} value={item} maxValue={100} color={color} totalBars={instruction.array.length}/>
-                      
-
-                      <p>{value}</p>
-                        
-                      </div>
-                    );
-  
-                  })
-                }
-              </div>
-  
-      
-            </div>
-          
-        )
-      }
-    }
-  
-    const DynamicBar = ({ value, maxValue, color = 'blue', totalBars  }) => {
-      const percentage = (value / maxValue) * 100;  
-      const containerWidth = 600; // Set a fixed container width in pixels
-
-        const barWidth = Math.max(4, containerWidth / totalBars) + "px"; // Ensures bars are at least 5px wide
-      
-      const barStyle = {
-        width: barWidth,
-        height:  percentage ,
-        backgroundColor: color, 
-        transition: 'width 0.3s ease-in-out', // Optional: for smooth transitions
-      };
-    
-      return ( 
-          <div style={barStyle}></div>  
-      );
-    };
     
   
   
@@ -175,7 +109,7 @@ const BubbleSort = () => {
   
           <div className='body'>   
         
-                  {visualizer(step)}
+                  {visualizer(step,size)}
    
             
           </div>
@@ -190,6 +124,18 @@ const BubbleSort = () => {
                 onChange={(e) => setSize(Number(e.target.value))}
                 />
       <p>Value: {size}</p>
+
+      
+      <input
+                type="range"
+                min="1500"
+                max="2000"
+                value={speed}
+                className="slider"
+                id="myRange"
+                onChange={(e) => setSpeed(Number(e.target.value))}
+                />
+      <p>Speed: {speed}</p>
         </div>
       </div>
     );

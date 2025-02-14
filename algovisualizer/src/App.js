@@ -65,66 +65,66 @@ function App() {
 
 
 
-  
-function visualizer(instruction){
+    
+  function visualizer(instruction){
 
-  if(instruction.action){
-    return(
-      
-        <div className='body'>
-          <div>
-          <p>{instruction.action} {instruction.left}  {instruction.right} </p>
-           
+    if(instruction.action){
+      return(
+        
+          <div className='body'>
+            <div>
+            <p>{instruction.action} {instruction.left}  {instruction.right} </p>
+            
 
-          </div>
-          <div className='bar-grid'>
+            </div>
+            <div className='bar-grid'>
 
 
-              {instruction.array.map((item, index) => {
+                {instruction.array.map((item, index) => {
 
-                let color = "green"; // Default color
+                  let color = "green"; // Default color
 
-                if(index == instruction.left || index == instruction.right){
-                  color = "blue"
-                }
-                
-                return(
+                  if(index == instruction.left || index == instruction.right){
+                    color = "blue"
+                  }
                   
-                  <div >
-
-                    <DynamicBar key={index} value={item} maxValue={10} color={color} />
-                  
+                  return(
                     
-                  </div>
-                );
+                    <div >
 
-              })
-            }
+                      <DynamicBar key={index} value={item} maxValue={10} color={color} />
+                    
+                      
+                    </div>
+                  );
+
+                })
+              }
+            </div>
+
+    
           </div>
-
-  
-        </div>
-      
-    )
+        
+      )
+    }
   }
-}
 
-const DynamicBar = ({ value, maxValue, color = 'blue', width = '15px' }) => {
-  const percentage = (value / maxValue) * 100;  
-  const size = (array.length-1/100)*.01
+  const DynamicBar = ({ value, maxValue, color = 'blue', width = '15px' }) => {
+    const percentage = (value / maxValue) * 100;  
+    const size = (array.length-1/100)*.01
+    
+    const barStyle = {
+      width: width,
+      height:  percentage ,
+      backgroundColor: color, 
+      transition: 'width 0.3s ease-in-out', // Optional: for smooth transitions
+    };
   
-  const barStyle = {
-    width: width,
-    height:  percentage ,
-    backgroundColor: color, 
-    transition: 'width 0.3s ease-in-out', // Optional: for smooth transitions
+    return ( 
+        <div style={barStyle}></div>  
+    );
   };
- 
-  return ( 
-      <div style={barStyle}></div>  
-  );
-};
- 
+  
 
 
   
