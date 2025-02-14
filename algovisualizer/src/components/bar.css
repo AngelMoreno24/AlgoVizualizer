@@ -4,6 +4,9 @@
     align-items:baseline;  
     padding-top: 150px;
     padding-bottom: 150px;
+    min-width: 500px; 
+    justify-content: center; 
+    display: flex; 
 }
 
 .container{

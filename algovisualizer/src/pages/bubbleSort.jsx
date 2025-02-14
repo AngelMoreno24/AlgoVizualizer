@@ -4,6 +4,7 @@ import { bubbleSort } from '../algorithms/bubbleSort';
 import { useEffect, useState } from 'react';
 import '../components/bar.css'
 import '../components/layout.css'
+import numberGen from '../components/numberGen';
 
 const BubbleSort = () => {
   
@@ -18,10 +19,10 @@ const BubbleSort = () => {
   
   
     useEffect(()=>{
-  
-      setArray(bubbleSort([2,5,12,6,7,3,5,1,12,2,5,12,6,7,3,5,1,12,2,5,12,6,7,3,5,1,12,2,5,12,6,7,3,5,1,12]));
-      
-    },[])
+        
+      setArray(bubbleSort(numberGen(size)));
+      setIndex(0);
+    },[size])
   
     useEffect(()=>{ 
   
@@ -87,13 +88,19 @@ const BubbleSort = () => {
                     if(index == instruction.left || index == instruction.right){
                       color = "blue"
                     }
-                    
+                    let value = "";
+                    if(size<30){
+
+                        value = item;
+                    }
                     return(
                       
                       <div >
   
-                        <DynamicBar key={index} value={item} maxValue={10} color={color} />
+                        <DynamicBar key={index} value={item} maxValue={100} color={color} totalBars={instruction.array.length}/>
                       
+
+                      <p>{value}</p>
                         
                       </div>
                     );
@@ -109,12 +116,14 @@ const BubbleSort = () => {
       }
     }
   
-    const DynamicBar = ({ value, maxValue, color = 'blue', width = '15px' }) => {
+    const DynamicBar = ({ value, maxValue, color = 'blue', totalBars  }) => {
       const percentage = (value / maxValue) * 100;  
-      const size = (array.length-1/100)*.01
+      const containerWidth = 600; // Set a fixed container width in pixels
+
+        const barWidth = Math.max(4, containerWidth / totalBars) + "px"; // Ensures bars are at least 5px wide
       
       const barStyle = {
-        width: width,
+        width: barWidth,
         height:  percentage ,
         backgroundColor: color, 
         transition: 'width 0.3s ease-in-out', // Optional: for smooth transitions
@@ -173,7 +182,7 @@ const BubbleSort = () => {
 
           <input
                 type="range"
-                min="1"
+                min="10"
                 max="100"
                 value={size}
                 className="slider"
