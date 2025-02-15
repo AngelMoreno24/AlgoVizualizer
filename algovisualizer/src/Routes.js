@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import BubbleSort from './pages/bubbleSort';
 import QuickSort from './pages/quickSort';
 import InsertionSort from './pages/insertionSort';
+import Home from './pages/home';
  
 const AppRoutes = () => {
 
@@ -10,10 +11,11 @@ const AppRoutes = () => {
     <div>
         <Router>
             <Routes>
-                <Route path="/" element={<Navigate to="/bubbleSort" />} />
-                <Route path="/bubbleSort" element={<BubbleSort />} />
-                <Route path="/quickSort" element={<QuickSort />} />
-                <Route path="/insertionSort" element={<InsertionSort />} />
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/bubble-sort" element={<BubbleSort />} />
+                <Route path="/quick-sort" element={<QuickSort />} />
+                <Route path="/insertion-sort" element={<InsertionSort />} />
             </Routes>
         </Router>
     </div>
