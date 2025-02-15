@@ -75,73 +75,57 @@ const  InsertionSort = () => {
   
     
     return (
-      <div className="App"> 
-        <div className="background-color">
-          
-        <div class="header">
-  
-          <h1> Insertion Sort</h1>
-        </div>
-          
-          <div class="btn-space">
-  
-            <div class="btn-group">
-  
-              <button onClick={()=>{setIndex(0)}}>
-                skip back
-              </button>
-  
-              <button onClick={()=>{setIndex(index-1)}}>
-                step back
-              </button>
-  
-              <button onClick={()=>{play?(setPlay(false)):(setPlay(true))}}>
-                {play?("pause"):("play")}
-              </button>
-              
-              <button onClick={()=>{setIndex(index+1)}}>
-                step forward
-              </button>
-    
-              <button onClick={()=>{setIndex(array.length-1)}}>
-                skip forward
-              </button>
-  
+        <div className="app-container">
+          <div className="background">
+            {/* Header */}
+            <header className="header">
+              <h1>Insertion Sort</h1>
+            </header>
+      
+            {/* Visualization Area */}
+            {visualizer(step, size)}
+      
+            {/* Controls */}
+            <div className="controls">
+              {/* Sliders */}
+              <div className="slider-group">
+                <label>
+                  Size:
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={size}
+                    className="slider"
+                    onChange={(e) => setSize(Number(e.target.value))}
+                  />
+                </label>
+      
+                <label>
+                  Speed:
+                  <input
+                    type="range"
+                    min="1500"
+                    max="2000"
+                    value={speed}
+                    className="slider"
+                    onChange={(e) => setSpeed(Number(e.target.value))}
+                  />
+                </label>
+              </div>
+      
+              {/* Buttons */}
+              <div className="btn-group">
+                <button onClick={() => setIndex(0)}>⏮ Skip Back</button>
+                <button onClick={() => setIndex(index - 1)}>◀ Step Back</button>
+                <button onClick={() => setPlay(!play)}>{play ? "⏸ Pause" : "▶ Play"}</button>
+                <button onClick={() => setIndex(index + 1)}>▶ Step Forward</button>
+                <button onClick={() => setIndex(array.length - 1)}>⏭ Skip Forward</button>
+              </div>
             </div>
           </div>
-  
-          <div className='body'>   
-        
-                  {visualizer(step,size)}
-   
-            
-          </div>
-
-          <input
-                type="range"
-                min="10"
-                max="100"
-                value={size}
-                className="slider"
-                id="myRange"
-                onChange={(e) => setSize(Number(e.target.value))}
-                />
-      <p>Value: {size}</p>
-
-      
-      <input
-                type="range"
-                min="1500"
-                max="2000"
-                value={speed}
-                className="slider"
-                id="myRange"
-                onChange={(e) => setSpeed(Number(e.target.value))}
-                />
-      <p>Speed: {speed}</p>
         </div>
-      </div>
-    );
+      );
 }
 
 export default InsertionSort
