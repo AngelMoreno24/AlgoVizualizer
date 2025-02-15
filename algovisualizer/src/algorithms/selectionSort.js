@@ -5,7 +5,7 @@ export function selectionSort(arr) {
     for(let i=0;i<arr.length;i++){
         let minIndex = i;
 
-        for(let j=1;j<arr.length;j++){
+        for(let j=i+1;j<arr.length;j++){
 
             steps.push({
                 action: "comparison",
@@ -15,7 +15,7 @@ export function selectionSort(arr) {
                 array: [...arr]
             });
 
-            if(arr[i]<lowest){
+            if(arr[j]<arr[minIndex]){
                 minIndex = j;
                 
                 steps.push({
@@ -29,16 +29,17 @@ export function selectionSort(arr) {
             }
         } 
 
-        if (minIndex !== i) {
+        if (minIndex != i) {
 
             [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
+
             steps.push({
                 action: "swap lowest",
                 left: i,
-                right: j,
                 pivot: minIndex,
                 array: [...arr]
             });
         }
     }
+    return steps;
 }

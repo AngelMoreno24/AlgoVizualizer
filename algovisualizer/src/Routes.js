@@ -4,7 +4,9 @@ import BubbleSort from './pages/bubbleSort';
 import QuickSort from './pages/quickSort';
 import InsertionSort from './pages/insertionSort';
 import Home from './pages/home';
- 
+import SelectionSort from './pages/selectionSort';
+
+
 const AppRoutes = () => {
 
   return (
@@ -16,6 +18,7 @@ const AppRoutes = () => {
                 <Route path="/bubble-sort" element={<BubbleSort />} />
                 <Route path="/quick-sort" element={<QuickSort />} />
                 <Route path="/insertion-sort" element={<InsertionSort />} />
+                <Route path="/selection-sort" element={<SelectionSort />} />
             </Routes>
         </Router>
     </div>
