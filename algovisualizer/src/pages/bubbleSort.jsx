@@ -6,6 +6,8 @@ import '../components/bar.css'
 import '../components/layout.css'
 import numberGen from '../components/numberGen';
 import visualizer from '../components/visualizer';
+import { quickSort } from '../algorithms/quickSort';
+
 const BubbleSort = () => {
   
   

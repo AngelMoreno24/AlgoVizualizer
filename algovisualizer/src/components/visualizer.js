@@ -8,7 +8,7 @@ function visualizer(instruction,size){
         
           <div className='body'>
             <div>
-            <p>{instruction.action} {instruction.left}  {instruction.right} </p>
+            <p>{instruction.action} {instruction.left}  {instruction.right} {instruction.pivot}</p>
             
 
             </div>
@@ -17,10 +17,14 @@ function visualizer(instruction,size){
 
                 {instruction.array.map((item, index) => {
 
-                  let color = "green"; // Default color
+                  let color = "black"; // Default color
 
                   if(index == instruction.left || index == instruction.right){
-                    color = "blue"
+                    color = "red"
+                  }
+                  
+                  if(index == instruction.pivot){
+                    color = "green"
                   }
                   let value = "";
                   if(size<30){
@@ -50,7 +54,7 @@ function visualizer(instruction,size){
     }
   }
 
-  const DynamicBar = ({ value, maxValue, color = 'blue', totalBars  }) => {
+  const DynamicBar = ({ value, maxValue, color = 'red', totalBars  }) => {
     const percentage = (value / maxValue) * 320;  
     const containerWidth = 600; // Set a fixed container width in pixels
 
