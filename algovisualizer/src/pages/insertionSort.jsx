@@ -6,10 +6,9 @@ import '../components/bar.css'
 import '../components/layout.css'
 import numberGen from '../components/numberGen';
 import visualizer from '../components/visualizer';
-import { quickSort } from '../algorithms/quickSort';
+import { insertionSort } from '../algorithms/insertionSort';
 
-
-const QuickSort = () => {
+const  InsertionSort = () => {
   
   
     let [array, setArray] = useState([]);
@@ -24,7 +23,7 @@ const QuickSort = () => {
   
     useEffect(()=>{
         
-      setArray(quickSort(numberGen(size)));
+      setArray(insertionSort(numberGen(size)));
       console.log(array)
       setIndex(0);
     },[size])
@@ -81,7 +80,7 @@ const QuickSort = () => {
           
         <div class="header">
   
-          <h1> Quick Sort</h1>
+          <h1> Insertion Sort</h1>
         </div>
           
           <div class="btn-space">
@@ -145,4 +144,4 @@ const QuickSort = () => {
     );
 }
 
-export default QuickSort
+export default InsertionSort
