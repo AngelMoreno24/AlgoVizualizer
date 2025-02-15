@@ -78,14 +78,15 @@
 .bar-grid {
   display: flex;
   gap: 2px;
-  align-items: flex-end; /* Aligns bars to the bottom */
+  align-items: flex-end; /* Ensures bars grow from the bottom */
   padding-top: 50px;
   padding-bottom: 50px;
   justify-content: center;
   width: 100%;
   max-width: 800px; /* Prevents excessive stretching */
+  height: 320px; /* Fixed height so the container doesn’t shrink */
+  border: 1px solid #ccc; /* Optional: Just for visualization */
 }
-
 /* Individual bar wrapper (contains bar and label) */
 .bar-container {
   display: flex;
@@ -93,7 +94,8 @@
   align-items: center;
 }
 
-/* DynamicBar styling */
+/* DynamicBar - Prevents layout shifts */
 .dynamic-bar {
   transition: height 0.3s ease-in-out;
+  width: 100%;
 }
