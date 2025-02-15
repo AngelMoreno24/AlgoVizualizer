@@ -8,7 +8,7 @@ function visualizer(instruction,size){
         
           <div className='body'>
             <div>
-            <p>{instruction.action} {instruction.left}  {instruction.right} {instruction.pivot}</p>
+            <p>{instruction.action}, i={instruction.left},  j={instruction.right}, pivot={instruction.pivot}</p>
             
 
             </div>
@@ -25,6 +25,10 @@ function visualizer(instruction,size){
                   
                   if(index == instruction.pivot){
                     color = "green"
+                  }
+
+                  if(index == instruction.pivotSwap){
+                    color = "blue"
                   }
                   let value = "";
                   if(size<30){

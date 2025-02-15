@@ -11,18 +11,25 @@ export function quickSort(array) {
             // Record the comparison
             steps.push({
                 action: "comparison",
-                left: j,
-                right: high,
+                left: i,
+                right: j,
                 pivot: high,
                 array: [...arr]
             });
 
             if (arr[j] < pivot) {
                 i++;
+                steps.push({
+                    action: "increment i",
+                    left: i,
+                    right: j,
+                    pivot: high,
+                    array: [...arr]
+                });
                 if (i !== j) {
                     [arr[i], arr[j]] = [arr[j], arr[i]];
                     steps.push({
-                        action: "swap",
+                        action: "swap1",
                         left: i,
                         right: j,
                         pivot: high,
@@ -32,13 +39,20 @@ export function quickSort(array) {
             }
         }
         
+        steps.push({
+            action: "increment for pivot swap",
+            pivotSwap: i + 1,
+            pivot: high,
+            array: [...arr]
+        });
         // Swap the pivot into place
         [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
         steps.push({
-            action: "swap",
+            action: "swap pivot",
             left: i + 1,
+            pivotSwap: high,
             right: high,
-            pivot: high,
+            pivot: i + 1,
             array: [...arr]
         });
 
@@ -49,8 +63,9 @@ export function quickSort(array) {
         if (low < high) {
             let pi = partition(arr, low, high);
 
+            // Log pivot placement
             steps.push({
-                action: "partition",
+                action: "pivot",
                 pivot: pi,
                 array: [...arr]
             });
