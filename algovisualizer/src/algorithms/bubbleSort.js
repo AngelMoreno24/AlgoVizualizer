@@ -9,10 +9,10 @@ export function bubbleSort(array) {
 
     let sorted = false;
 
-    console.log("before")
+    //console.log("before")
     while(start < end && !sorted){
 
-        console.log("start")
+        //console.log("start")
         sorted = true;
         for(let i = 0; i < end; i++){
 
@@ -24,7 +24,7 @@ export function bubbleSort(array) {
                     array: [...array]
                 }
             )
-            console.log(array)
+            //console.log(array)
 
             if(array[i] > array[i+1]){
                 let temp = array[i+1];
@@ -32,7 +32,7 @@ export function bubbleSort(array) {
                 array[i] = temp;
                 sorted=false;
 
-                console.log(`swapped ${array[i]} and ${array[i+1]}`)
+                //console.log(`swapped ${array[i]} and ${array[i+1]}`)
                 
             steps.push(
                 {
@@ -47,7 +47,7 @@ export function bubbleSort(array) {
         }
         end--;
     }
-console.log(steps)
+//console.log(steps)
 
 
     return steps;
