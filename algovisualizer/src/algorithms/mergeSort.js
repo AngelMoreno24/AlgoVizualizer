@@ -1,53 +1,81 @@
-function mergeSort(array) {
+export function mergeSort(array) {
     let steps = [];
+    let auxArray = [...array]; // Auxiliary array for modifications
 
-    // Merge function to combine two sorted arrays
-    function merge(left, right) {
-        let result = [];
-        let i = 0;
-        let j = 0;
+    function merge(arr, left, mid, right) {
+        let leftPart = arr.slice(left, mid + 1);
+        let rightPart = arr.slice(mid + 1, right + 1);
+        let i = 0, j = 0, k = left;
 
-        // Compare each element and push the smaller one to the result
-        while (i < left.length && j < right.length) {
-            if (left[i] < right[j]) {
-                result.push(left[i]);
-                steps.push({
-                    action: "pushed",
-                    left: i + 1,
-                    pivotSwap: high,
-                    right: high,
-                    pivot: i + 1,
-                    array: [...arr]
-                });
-                i += 1;
+        while (i < leftPart.length && j < rightPart.length) {
+            // Record the comparison
+            steps.push({
+                action: "comparison",
+                left: left + i,
+                right: mid + 1 + j,
+                array: [...arr] // Capture the state of the entire array
+            });
+
+            if (leftPart[i] <= rightPart[j]) {
+                arr[k] = leftPart[i];
+                i++;
             } else {
-                result.push(right[j]);
-                j += 1;
+                arr[k] = rightPart[j];
+                j++;
             }
+            k++;
+
+            // Capture array after modification
+            steps.push({
+                action: "merge",
+                leftIndex: left,
+                rightIndex: right,
+                array: [...arr] // Capture entire array after each merge step
+            });
         }
 
-        // If there are leftover elements in either array, add them to the result
-        result = result.concat(left.slice(i), right.slice(j));
-
-        return result;
-    }
-
-    // Recursive mergeSort function
-    function mergeSortRecursive(array, low, high) {
-        if (low >= high) {
-            return [array[low]]; // Base case: single element, return as an array
+        // Copy any remaining elements
+        while (i < leftPart.length) {
+            arr[k] = leftPart[i];
+            i++;
+            k++;
+            steps.push({ action: "merge", leftIndex: left, rightIndex: right, array: [...arr] });
         }
 
-        let mid = Math.floor((low + high) / 2);
-        let left = mergeSortRecursive(array, low, mid);
-        let right = mergeSortRecursive(array, mid + 1, high);
-
-        return merge(left, right);
+        while (j < rightPart.length) {
+            arr[k] = rightPart[j];
+            j++;
+            k++;
+            steps.push({ action: "merge", leftIndex: left, rightIndex: right, array: [...arr] });
+        }
     }
 
-    // Start the sorting process
-    
-    mergeSortRecursive(array, 0, array.length - 1); 
+    function mergeSortHelper(arr, left, right) {
+        if (left >= right) {
+            return;
+        }
 
-    return steps; // Return the sorted array
+        const mid = Math.floor((left + right) / 2);
+        mergeSortHelper(arr, left, mid);
+        mergeSortHelper(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+
+        // Track the full array after each merge operation
+        steps.push({
+            action: "subarray_sorted",
+            leftIndex: left,
+            rightIndex: right,
+            array: [...arr]
+        });
+    }
+
+    mergeSortHelper(auxArray, 0, array.length - 1);
+
+    // Final sorted array step
+    steps.push({
+        action: "sorted",
+        array: [...auxArray]
+    });
+
+    return steps;
 }

@@ -1,6 +1,5 @@
 import React from 'react'
  
-      
 function visualizer(instruction, size) {
   if (instruction.action) {
     return (
@@ -40,9 +39,10 @@ function visualizer(instruction, size) {
     );
   }
 }
+
 const DynamicBar = ({ value, maxValue, color = 'red', totalBars }) => {
-  const containerWidth = 600; // Fixed container width
-  const barWidth = Math.max(4, containerWidth / totalBars) + "px"; // Ensures bars are at least 4px wide
+  const containerWidth = Math.max(1000, totalBars * 3); // Adjusting width dynamically
+  const barWidth = Math.max(2, containerWidth / totalBars) + "px"; // Ensure bars are at least 2px wide
   const barHeight = (value / maxValue) * 320; // Normalized height
 
   const barStyle = {
@@ -54,4 +54,5 @@ const DynamicBar = ({ value, maxValue, color = 'red', totalBars }) => {
 
   return <div className="dynamic-bar" style={barStyle}></div>;
 };
-export default visualizer
+
+export default visualizer;
