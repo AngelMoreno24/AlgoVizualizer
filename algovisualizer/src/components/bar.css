@@ -85,7 +85,6 @@
   width: 100%;
   max-width: 1800px; /* Prevents excessive stretching */
   height: 320px; /* Fixed height so the container doesn’t shrink */
-  border: 1px solid #ccc; /* Optional: Just for visualization */
 }
 /* Individual bar wrapper (contains bar and label) */
 .bar-container {

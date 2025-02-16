@@ -19,17 +19,34 @@ export function mergeSort(array) {
             if (leftPart[i] <= rightPart[j]) {
                 arr[k] = leftPart[i];
                 i++;
+                
+                steps.push({
+                    action: "added left",
+                    left: i-1,
+                    right: j,
+                    pivot:k,
+                    array: [...arr] // Capture entire array after each merge step
+                });
             } else {
                 arr[k] = rightPart[j];
                 j++;
+                
+                steps.push({
+                    action: "added right",
+                    left: i,
+                    right: j-1,
+                    pivot:k,
+                    array: [...arr] // Capture entire array after each merge step
+                });
             }
             k++;
 
             // Capture array after modification
             steps.push({
-                action: "merge",
-                leftIndex: left,
-                rightIndex: right,
+                action: "merge1",
+                left: i,
+                right: j,
+                pivot:k-1,
                 array: [...arr] // Capture entire array after each merge step
             });
         }
@@ -39,14 +56,20 @@ export function mergeSort(array) {
             arr[k] = leftPart[i];
             i++;
             k++;
-            steps.push({ action: "merge", leftIndex: left, rightIndex: right, array: [...arr] });
+            steps.push({ action: "merge2", 
+                left: i-1, 
+                pivot: k-1, 
+                array: [...arr] });
         }
 
         while (j < rightPart.length) {
             arr[k] = rightPart[j];
             j++;
             k++;
-            steps.push({ action: "merge", leftIndex: left, rightIndex: right, array: [...arr] });
+            steps.push({ action: "merge3",
+                pivot: k-1,
+                right: j-1,
+                array: [...arr] });
         }
     }
 
@@ -63,8 +86,8 @@ export function mergeSort(array) {
         // Track the full array after each merge operation
         steps.push({
             action: "subarray_sorted",
-            leftIndex: left,
-            rightIndex: right,
+            left: left,
+            right: right,
             array: [...arr]
         });
     }

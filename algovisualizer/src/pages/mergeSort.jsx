@@ -93,7 +93,7 @@ const  MergeSort = () => {
                   <input
                     type="range"
                     min="10"
-                    max="200"
+                    max="300"
                     value={size}
                     className="slider"
                     onChange={(e) => setSize(Number(e.target.value))}
