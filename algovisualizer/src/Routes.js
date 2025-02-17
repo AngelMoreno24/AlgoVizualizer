@@ -6,6 +6,7 @@ import InsertionSort from './pages/insertionSort';
 import Home from './pages/home';
 import SelectionSort from './pages/selectionSort';
 import MergeSort from './pages/mergeSort';
+import HeapSort from './pages/heapSort';
 
 const AppRoutes = () => {
 
@@ -20,6 +21,7 @@ const AppRoutes = () => {
                 <Route path="/insertion-sort" element={<InsertionSort />} />
                 <Route path="/selection-sort" element={<SelectionSort />} />
                 <Route path="/merge-sort" element={<MergeSort />} />
+                <Route path="/heap-sort" element={<HeapSort />} />
             </Routes>
         </Router>
     </div>

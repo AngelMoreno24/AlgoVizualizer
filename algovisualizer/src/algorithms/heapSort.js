@@ -40,6 +40,14 @@ export function heapSort(arr){
     
         // Build heap (rearrange array)
         for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+            
+            steps.push({
+                action: "build heap",
+                left: 0,
+                right: i,
+                pivot: n-1,
+                array: [...arr]
+            });
             heapify(arr, n, i);
         }
     
@@ -50,7 +58,12 @@ export function heapSort(arr){
             let temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
-    
+            steps.push({
+                action: "before heapify",
+                left: 0,
+                right: i,
+                array: [...arr]
+            });
             // Call max heapify on the reduced heap
             heapify(arr, i, 0);
         }
