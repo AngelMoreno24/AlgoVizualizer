@@ -23,11 +23,37 @@ export function heapSort(arr){
             largest = r;
         }
     
+        
+        steps.push({
+            action: "compare 1",
+            left: i,
+            right: largest,
+            pivot: r,
+            array: [...arr]
+        });
+        
         // If largest is not root
         if (largest !== i) {
+
+            steps.push({
+                action: "before swap",
+                left: i,
+                right: largest,
+                pivot: r,
+                array: [...arr]
+            });
+
             let temp = arr[i]; // Swap
             arr[i] = arr[largest];
             arr[largest] = temp;
+
+            steps.push({
+                action: "after swap",
+                left: i,
+                right: largest,
+                pivot: r,
+                array: [...arr]
+            });
     
             // Recursively heapify the affected sub-tree
             heapify(arr, n, largest);
@@ -61,7 +87,7 @@ export function heapSort(arr){
             steps.push({
                 action: "before heapify",
                 left: 0,
-                right: i,
+                pivot: i,
                 array: [...arr]
             });
             // Call max heapify on the reduced heap

@@ -82,6 +82,7 @@ const HeapSort = () => {
           </header>
     
           {/* Visualization Area */}
+
           {visualizer(step, size)}
     
           {/* Controls */}
@@ -116,7 +117,7 @@ const HeapSort = () => {
             {/* Buttons */}
             <div className="btn-group">
               <button onClick={() => setIndex(0)}>⏮ Skip Back</button>
-              <button onClick={() => setIndex(index - 1)}>◀ Step Back</button>
+              <button onClick={() => setIndex(index>0? index-1:0)}>◀ Step Back</button>
               <button onClick={() => setPlay(!play)}>{play ? "⏸ Pause" : "▶ Play"}</button>
               <button onClick={() => setIndex(index + 1)}>▶ Step Forward</button>
               <button onClick={() => setIndex(array.length - 1)}>⏭ Skip Forward</button>
